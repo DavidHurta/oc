@@ -348,7 +348,7 @@ func (o *options) Run(ctx context.Context) error {
 
 	if workerUpgrade {
 		fmt.Fprintf(o.Out, "\n= Worker Upgrade =\n")
-		writePools(o.Out, workerPoolsStatusData)
+		writePools(o.Out, workerPoolsStatusData, controlPlaneStatusData.IsMultiArchMigration)
 		for _, pool := range workerPoolsStatusData {
 			pool.WriteNodes(o.Out, o.enabledDetailed(detailedOutputNodes))
 		}

@@ -475,7 +475,7 @@ func machineConfigPoolInsights(poolDisplay poolDisplayData, pool mcfgv1.MachineC
 	return insights
 }
 
-func writePools(w io.Writer, workerPoolsStatusData []poolDisplayData) {
+func writePools(w io.Writer, workerPoolsStatusData []poolDisplayData, isMultiArchMigration bool) {
 	tabw := tabwriter.NewWriter(w, 0, 0, 3, ' ', 0)
 	_, _ = tabw.Write([]byte("\nWORKER POOL\tASSESSMENT\tCOMPLETION\tSTATUS\n"))
 	for _, pool := range workerPoolsStatusData {
@@ -486,7 +486,11 @@ func writePools(w io.Writer, workerPoolsStatusData []poolDisplayData) {
 			_, _ = tabw.Write([]byte(fmt.Sprintf("%d Total", pool.NodesOverview.Total) + "\n"))
 		} else {
 			_, _ = tabw.Write([]byte(pool.Assessment + "\t"))
-			_, _ = tabw.Write([]byte(fmt.Sprintf("%.0f%% (%d/%d)", pool.Completion, pool.NodesOverview.Total-pool.NodesOverview.Outdated, pool.NodesOverview.Total) + "\t"))
+			if isMultiArchMigration {
+				_, _ = tabw.Write([]byte("N/A" + "\t"))
+			} else {
+				_, _ = tabw.Write([]byte(fmt.Sprintf("%.0f%% (%d/%d)", pool.Completion, pool.NodesOverview.Total-pool.NodesOverview.Outdated, pool.NodesOverview.Total) + "\t"))
+			}
 			status := fmt.Sprintf("%d Available, %d Progressing, %d Draining", pool.NodesOverview.Available, pool.NodesOverview.Progressing, pool.NodesOverview.Draining)
 			for k, v := range map[string]int{"Excluded": pool.NodesOverview.Excluded, "Degraded": pool.NodesOverview.Degraded} {
 				if v > 0 {

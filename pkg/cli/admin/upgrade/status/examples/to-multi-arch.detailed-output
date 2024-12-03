@@ -19,7 +19,7 @@ ip-10-0-95-224.us-east-2.compute.internal   Completed     Updated    4.18.0-ec.3
 = Worker Upgrade =
 
 WORKER POOL   ASSESSMENT    COMPLETION   STATUS
-worker        Progressing   67% (2/3)    2 Available, 1 Progressing, 1 Draining
+worker        Progressing   N/A          2 Available, 1 Progressing, 1 Draining
 
 Worker Pool Nodes: worker
 NAME                                        ASSESSMENT    PHASE      VERSION       EST    MESSAGE
