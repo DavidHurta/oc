@@ -160,7 +160,7 @@ func assessNodesStatus(cv *configv1.ClusterVersion, pool mcfgv1.MachineConfigPoo
 		isDegraded := isNodeDegraded(node)
 		isUpdated := foundCurrent && isLatestUpdateHistoryVersionEqualTo(cv.Status.History, currentVersion) &&
 			// The following condition is to handle the multi-arch migration because the version number stays the same there
-			(!ok || node.Annotations[mco.CurrentMachineConfigAnnotationKey] == desiredConfig)
+			(!ok || (node.Annotations[mco.CurrentMachineConfigAnnotationKey] == desiredConfig && desiredConfig == pool.Spec.Configuration.Name))
 
 		// foundCurrent makes sure we don't blip phase "updating" for nodes that we are not sure
 		// of their actual phase, even though the conservative assumption is that the node is
@@ -486,7 +486,7 @@ func writePools(w io.Writer, workerPoolsStatusData []poolDisplayData, isMultiArc
 			_, _ = tabw.Write([]byte(fmt.Sprintf("%d Total", pool.NodesOverview.Total) + "\n"))
 		} else {
 			_, _ = tabw.Write([]byte(pool.Assessment + "\t"))
-			if isMultiArchMigration {
+			if false {
 				_, _ = tabw.Write([]byte("N/A" + "\t"))
 			} else {
 				_, _ = tabw.Write([]byte(fmt.Sprintf("%.0f%% (%d/%d)", pool.Completion, pool.NodesOverview.Total-pool.NodesOverview.Outdated, pool.NodesOverview.Total) + "\t"))
