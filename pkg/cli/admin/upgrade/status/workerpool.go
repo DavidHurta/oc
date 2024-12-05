@@ -165,7 +165,8 @@ func assessNodesStatus(cv *configv1.ClusterVersion, pool mcfgv1.MachineConfigPoo
 		// foundCurrent makes sure we don't blip phase "updating" for nodes that we are not sure
 		// of their actual phase, even though the conservative assumption is that the node is
 		// at least updating or is updated.
-		isUpdating := !isUpdated && foundCurrent && foundDesired && isLatestUpdateHistoryVersionEqualTo(cv.Status.History, desiredVersion)
+		isUpdating := !isUpdated && foundCurrent && foundDesired && isLatestUpdateHistoryVersionEqualTo(cv.Status.History, desiredVersion) &&
+			(!ok || (node.Annotations[mco.CurrentMachineConfigAnnotationKey] != desiredConfig && desiredConfig == pool.Spec.Configuration.Name))
 
 		phase := calculatePhase(pool, node, isUpdating, isUpdated)
 		var estimate string
