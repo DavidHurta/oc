@@ -7,6 +7,11 @@ metadata:
   resourceVersion: "33707"
   uid: bc748c3a-3350-4ee7-a643-ed6166313d5b
 spec:
+  desiredUpdate:
+    architecture: 'Multi'
+    force: false
+    image: 'registry.build09.ci.openshift.org/ci-ln-mbvlrx2/release@sha256:abc'
+    version: 4.18.0-ec.3
   channel: candidate-4.18
   clusterID: 91b679e0-3b01-4ba4-ae90-ad05ddef9f55
   upstream: https://api.integration.openshift.com/api/upgrades_info/graph
@@ -101,9 +106,15 @@ status:
     channels:
     - candidate-4.18
     - candidate-4.19
-    image: registry.build09.ci.openshift.org/ci-ln-mbvlrx2/release@sha256:d2d34aafe0adda79953dd928b946ecbda34673180ee9a80d2ee37c123a0f510c
+    image: registry.build09.ci.openshift.org/ci-ln-mbvlrx2/release@sha256:abc
     version: 4.18.0-ec.3
   history:
+  - completionTime: "2024-12-09T23:49:58Z"
+    image: registry.build09.ci.openshift.org/ci-ln-mbvlrx2/release@sha256:abc
+    startedTime: "2024-12-09T23:28:27Z"
+    state: Completed
+    verified: false
+    version: 4.18.0-ec.3
   - completionTime: "2024-12-09T23:49:58Z"
     image: registry.build09.ci.openshift.org/ci-ln-mbvlrx2/release@sha256:d2d34aafe0adda79953dd928b946ecbda34673180ee9a80d2ee37c123a0f510c
     startedTime: "2024-12-09T23:28:27Z"

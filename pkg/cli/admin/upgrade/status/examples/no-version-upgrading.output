@@ -1,1 +1,23 @@
-The cluster is not updating.
+= Control Plane =
+Assessment:      Progressing
+Target Version:  4.18.0-ec.3 to Multi-Architecture
+Completion:      97% (32 operators updated, 0 updating, 1 waiting)
+Duration:        22m (Est. Time Remaining: N/A for Multi-Architecture Migration)
+Operator Health: 33 Healthy
+
+All control plane nodes successfully updated to 4.18.0-ec.3
+
+= Worker Upgrade =
+
+WORKER POOL   ASSESSMENT    COMPLETION   STATUS
+worker        Progressing   0% (0/3)     2 Available, 1 Progressing, 1 Draining
+
+Worker Pool Nodes: worker
+NAME                          ASSESSMENT    PHASE      VERSION       EST    MESSAGE
+ip-10-0-12-121.ec2.internal   Progressing   Draining   4.18.0-ec.3   +10m   
+ip-10-0-29-147.ec2.internal   Outdated      Pending    4.18.0-ec.3   ?      
+ip-10-0-90-45.ec2.internal    Outdated      Pending    4.18.0-ec.3   ?      
+
+= Update Health =
+SINCE    LEVEL   IMPACT   MESSAGE
+38m28s   Info    None     Update is proceeding well
